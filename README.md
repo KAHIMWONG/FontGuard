@@ -35,6 +35,6 @@ The data is organized as follows:
 
 To extract the bitstream from test set font images, first update the paths in `cfg.py`. Then, execute the following command:
 ```bash
-python dec.py
+python test.py
 ```   
  
