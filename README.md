@@ -4,7 +4,7 @@
 [![Venue](https://img.shields.io/badge/IEEE-TMM%202025-0a66c2.svg)](https://ieeexplore.ieee.org/document/11146602)
 [![License](https://img.shields.io/github/license/KahimWong/FontGuard)](LICENSE)
 
-> **FontGuard** is a robust font watermarking framework that embeds bits by manipulating font style representations (instead of only pixel-space perturbations), then decodes them with contrastive learning.
+> **FontGuard** is a robust font watermarking framework that embeds bits by manipulating font style representations (instead of only pixel-space perturbations), then decodes them with contrastive learning for robust recovery under cross-media and OSN transmission distortions.
 
 ![Model Overview](./fig/model_overview.png)
 
@@ -58,24 +58,27 @@ Set the `root` directory in `cfg.py`, then place required files under that root:
 - background images (`bg_dir`, default: `root/val2017`)
 
 Pretrained resources:
-- [Google Drive](https://drive.google.com/file/d/1QtjmwWe7bi1SY_Q88ZPdP5Q6MsLba7Lr/view?usp=sharing)
+- Original resources: [Google Drive](https://drive.google.com/file/d/1QtjmwWe7bi1SY_Q88ZPdP5Q6MsLba7Lr/view?usp=sharing)
+- Released FontGuard checkpoints: [Google Drive](https://drive.google.com/file/d/1CUIkCuVcwsbqth3BW1wxRjijTzBIX8TX/view?usp=sharing)
 
 Recommended `exp_data` layout (matching `cfg.py` defaults):
 
 ```text
 exp_data/
-├── SimSun/                      # training font images (ImageFolder style)
-│   └── <font-subdir>/
-│       ├── 0000.png
-│       └── ...
-├── val2017/                     # background images (e.g., COCO val2017)
-├── base_sty_feat_CH.pth         # extracted mean style feature (chinese font)
-├── clip_cls_CH.pt               # pretrained decoder checkpoint (chinese font)
-├── font_model_CH.ckpt           # pretrained font recognition model (chinese font)
-├── base_sty_feat_ENG.pth         # extracted mean style feature (english font)
-├── clip_cls_ENG.pt               # pretrained decoder checkpoint (english font)
-└── font_model_ENG.ckpt           # pretrained font recognition model (english font)
+├── FangSong_ttf/
+├── KaiTi_ttf/
+├── SimSun_ttf/
+├── Times_ttf/
+├── Verdana_ttf/
+├── FangSong_0bit_ft_dec.pth
+├── KaiTi_0bit_ft_dec.pth
+├── SimSun_0bit_e2e.pyt
+├── SimSun_0bit_ft_dec.pth
+├── Times_0bit_ft_dec.pth
+└── Verdana_0bit_ft_dec.pth
 ```
+
+If you are also preparing training assets referenced by `cfg.py`, a typical setup may additionally include font image folders, background images, style features, and font recognition checkpoints under the same root directory.
 
 ### 3) Organize font images correctly
 
@@ -120,9 +123,9 @@ The demo folder includes evaluation code for released 1-bit watermarked SimSun a
 - **Cross-media**: screenshots, screen-camera capture, and print-camera capture
 - **Online social networks (OSNs)**: Facebook, WhatsApp, Weibo, and WeChat
 
-For data collection, screen-camera capture used an **iMac17,1** as the display device, and print-camera capture used an **ApeosPrint C5570 TC** printer with the default **600 dpi** scanning resolution. All image captures were taken with a **HUAWEI P60** using default camera settings.
+For data collection, screen-camera capture used an **iMac17,1** as the display device, and print-camera capture used an **ApeosPrint C5570 TC** printer with the default **600 dpi** scanning resolution.
 
-For OSN transmission, Facebook and WhatsApp upload/download were performed on an **Alienware Aurora R9** running **Windows 11 version 22621**, while Weibo and WeChat transmission used a **HUAWEI P60** running **HarmonyOS 4.0.0**.
+For OSN transmission, Facebook and WhatsApp upload/download were performed on an **Alienware Aurora R9** running **Windows 11 version 22621**, while Weibo and WeChat transmission used a **HUAWEI Mate 60 Pro** smartphone.
 
 1. Download demo package (see `demo/README.md`).
 2. Configure paths in `demo/demo_cfg.py`.
